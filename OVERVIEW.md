@@ -537,12 +537,12 @@ State components:
 
 ## Phase 5: Commerce State
 
-- [ ] Implement Zustand cart store
-- [ ] Implement wishlist store
-- [ ] Implement recently viewed store
-- [ ] Implement comparison store
-- [ ] Add optimistic UI behavior
-- [ ] Add empty, loading, and error states
+- [x] Implement Zustand cart store
+- [x] Implement wishlist store
+- [x] Implement recently viewed store
+- [x] Implement comparison store
+- [x] Add optimistic UI behavior
+- [x] Add empty, loading, and error states
 
 ## Phase 6: SEO, Performance, Accessibility
 

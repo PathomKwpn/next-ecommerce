@@ -6,4 +6,5 @@ export * from "./product-grid";
 export * from "./product-listing-view";
 export * from "./product-media-frame";
 export * from "./product-pagination";
-
+export * from "./recently-viewed-section";
+export * from "./recently-viewed-tracker";

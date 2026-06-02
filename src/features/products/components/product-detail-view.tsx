@@ -3,6 +3,8 @@ import Link from "next/link";
 import { ProductDetailActions } from "./product-detail-actions";
 import { ProductGrid } from "./product-grid";
 import { ProductMediaFrame } from "./product-media-frame";
+import { RecentlyViewedSection } from "./recently-viewed-section";
+import { RecentlyViewedTracker } from "./recently-viewed-tracker";
 import type { Product } from "@/types";
 
 interface ProductDetailViewProps {
@@ -16,6 +18,7 @@ export function ProductDetailView({
 }: ProductDetailViewProps) {
   return (
     <div className="mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+      <RecentlyViewedTracker product={product} />
       <Link
         href="/products"
         className="text-sm font-semibold text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
@@ -85,6 +88,7 @@ export function ProductDetailView({
         </div>
         <ProductGrid products={recommendedProducts} />
       </section>
+      <RecentlyViewedSection />
     </div>
   );
 }

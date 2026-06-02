@@ -1,8 +1,14 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 
 import { buttonVariants } from "@/components/ui/button";
+import {
+  useCartStore,
+  useComparisonStore,
+  useWishlistStore,
+} from "@/store";
 import type { Product, ProductColor, ProductSize } from "@/types";
 
 interface ProductDetailActionsProps {
@@ -14,6 +20,36 @@ export function ProductDetailActions({ product }: ProductDetailActionsProps) {
     product.colors[0],
   );
   const [selectedSize, setSelectedSize] = useState<ProductSize | null>(null);
+  const [message, setMessage] = useState("");
+  const addCartItem = useCartStore((state) => state.addItem);
+  const toggleWishlistItem = useWishlistStore((state) => state.toggleItem);
+  const isWishlisted = useWishlistStore((state) => state.isWishlisted(product.id));
+  const toggleComparisonItem = useComparisonStore((state) => state.toggleItem);
+  const isCompared = useComparisonStore((state) => state.isCompared(product.id));
+
+  function handleAddToCart() {
+    if (!selectedSize) {
+      setMessage("Choose a size before adding this product.");
+      return;
+    }
+
+    addCartItem({
+      product,
+      color: selectedColor,
+      size: selectedSize,
+    });
+    setMessage("Added to cart.");
+  }
+
+  function handleWishlistToggle() {
+    toggleWishlistItem(product);
+    setMessage(isWishlisted ? "Removed from wishlist." : "Saved to wishlist.");
+  }
+
+  function handleComparisonToggle() {
+    toggleComparisonItem(product);
+    setMessage(isCompared ? "Removed from comparison." : "Added to comparison.");
+  }
 
   return (
     <div className="grid gap-6">
@@ -67,6 +103,7 @@ export function ProductDetailActions({ product }: ProductDetailActionsProps) {
       <div className="sticky bottom-20 z-20 grid gap-3 border border-border bg-background/92 p-3 backdrop-blur md:bottom-4">
         <button
           type="button"
+          onClick={handleAddToCart}
           className={buttonVariants({
             size: "lg",
             className: "h-12 rounded-none",
@@ -74,12 +111,43 @@ export function ProductDetailActions({ product }: ProductDetailActionsProps) {
         >
           Add To Cart / ${product.price}
         </button>
+        <div className="grid gap-2 sm:grid-cols-2">
+          <button
+            type="button"
+            onClick={handleWishlistToggle}
+            className={buttonVariants({
+              variant: "outline",
+              size: "lg",
+              className: "h-11 rounded-none",
+            })}
+          >
+            {isWishlisted ? "Saved" : "Save"}
+          </button>
+          <button
+            type="button"
+            onClick={handleComparisonToggle}
+            className={buttonVariants({
+              variant: "outline",
+              size: "lg",
+              className: "h-11 rounded-none",
+            })}
+          >
+            {isCompared ? "Comparing" : "Compare"}
+          </button>
+        </div>
         <p className="text-xs text-muted-foreground">
           Selection: {selectedColor}
           {selectedSize ? ` / ${selectedSize}` : " / choose size"}
         </p>
+        {message ? (
+          <div className="flex items-center justify-between gap-3 text-xs text-muted-foreground">
+            <span>{message}</span>
+            <Link href="/cart" className="font-semibold text-foreground">
+              View cart
+            </Link>
+          </div>
+        ) : null}
       </div>
     </div>
   );
 }
-
