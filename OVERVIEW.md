@@ -505,7 +505,7 @@ State components:
 - [x] Install required dependencies
 - [x] Configure Tailwind CSS and shadcn
 - [x] Set project metadata
-- [ ] Establish complete base layout and design tokens
+- [x] Establish complete base layout and design tokens
 - [x] Verify lint and production build
 
 ## Phase 2: Architecture Skeleton
@@ -528,12 +528,12 @@ State components:
 
 ## Phase 4: Core Frontend
 
-- [ ] Build global layout
-- [ ] Build home page sections
-- [ ] Build product listing page
-- [ ] Build filters, sorting, search, and pagination
-- [ ] Build product detail page
-- [ ] Build responsive mobile filter drawer
+- [x] Build global layout
+- [x] Build home page sections
+- [x] Build product listing page
+- [x] Build filters, sorting, search, and pagination
+- [x] Build product detail page
+- [x] Build responsive mobile filter drawer
 
 ## Phase 5: Commerce State
 

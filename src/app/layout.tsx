@@ -1,4 +1,7 @@
 import type { Metadata } from "next";
+
+import { MobileNavigation, SiteFooter, SiteHeader } from "@/components/layout";
+
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -13,7 +16,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="h-full antialiased">
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full">
+        <div className="flex min-h-svh flex-col">
+          <SiteHeader />
+          <main className="flex-1">{children}</main>
+          <SiteFooter />
+          <MobileNavigation />
+        </div>
+      </body>
     </html>
   );
 }
